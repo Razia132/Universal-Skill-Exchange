@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Skill Exchange Platform</title>
+  <link rel="stylesheet" href="style.css"> <!-- Keep global CSS -->
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #eaf3fb, #d0e6fa);
+      color: #333;
+    }
+
+    header {
+      background: #4a90e2;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    header button {
+      padding: 8px 15px;
+      background: white;
+      color: #4a90e2;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    header button:hover {
+      background: #357ABD;
+      color: white;
+    }
+
+    .auth-container {
+      max-width: 420px;
+      margin: 80px auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .auth-container h2 {
+      margin-bottom: 20px;
+      color: #4a90e2;
+    }
+
+    .auth-container input {
+      width: 92%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #cfdff3;
+      border-radius: 10px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .auth-container input:focus {
+      border-color: #4a90e2;
+      box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    }
+
+    .auth-container button {
+      width: 100%;
+      padding: 12px;
+      background: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 15px;
+      transition: background 0.3s ease;
+    }
+
+    .auth-container button:hover {
+      background: #357ABD;
+    }
+
+    .signup-link {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .signup-link a {
+      color: #4a90e2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <h1>Skill Exchange Platform</h1>
+    <div>
+      <button onclick="window.location.href='home.html'">Home</button>
+      <button onclick="window.location.href='signup.html'">Sign Up</button>
+    </div>
+  </header>
+
+  <!-- Login form -->
+  <div class="auth-container">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Enter your email"><br>
+    <input type="password" id="password" placeholder="Enter your password"><br>
+    <button onclick="login()">Login</button>
+
+    <div class="signup-link">
+      Don’t have an account? <a href="signup.html">Sign up here</a>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+
+      let storedEmail = localStorage.getItem("userEmail");
+      let storedPassword = localStorage.getItem("userPassword");
+
+      if (email === storedEmail && password === storedPassword) {
+        alert("Login Successful! Welcome " + localStorage.getItem("userName"));
+        window.location.href = "home.html"; 
+      } else {
+        alert("Invalid email or password! Try again or Sign up.");
+      }
+    }
+  </script>
+</body>
+</html>

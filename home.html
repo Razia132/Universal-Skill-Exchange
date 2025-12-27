@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universal Skill Exchange Platform</title>
+  <style>
+   /* ===== General ===== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f6f9;
+  color: #333;
+}
+
+h2, h3, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Header / Navbar ===== */
+header {
+  background: #4a90e2;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 24px;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+header nav a:hover {
+  color: #dfe9f3;
+}
+
+#auth-buttons button,
+#user-info button {
+  margin-left: 10px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+#auth-buttons button {
+  background: #fff;
+  color: #4a90e2;
+}
+
+#auth-buttons button:hover {
+  background: #e0f0ff;
+}
+
+#user-info button {
+  background: #f44336;
+  color: #fff;
+}
+
+#user-info button:hover {
+  background: #d32f2f;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(120deg, #dfe9f3, #ffffff);
+}
+
+.hero h2 {
+  font-size: 36px;
+  color: #4a90e2;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.hero button {
+  padding: 12px 25px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.hero button:hover {
+  background: #357ABD;
+  transform: translateY(-2px);
+}
+
+/* ===== Search ===== */
+.search {
+  text-align: center;
+  padding: 25px 0;
+}
+
+.search input {
+  padding: 10px 15px;
+  width: 220px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.search input:focus {
+  border-color: #4a90e2;
+}
+
+.search button {
+  padding: 10px 18px;
+  margin-left: 10px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.search button:hover {
+  background: #357ABD;
+  transform: translateY(-2px);
+}
+
+/* ===== Profiles / Cards ===== */
+#profiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+#profiles h2 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #4a90e2;
+  font-size: 28px;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  width: 600px;
+  min-height: 180px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.card-left {
+  flex: 1;
+}
+
+.card-left h3 {
+  color: #4a90e2;
+  margin-bottom: 10px;
+}
+
+.card-left p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.card-right button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background: #4a90e2;
+  color: white;
+  transition: background 0.3s, transform 0.2s;
+  min-width: 140px;
+}
+
+.card-right button:hover {
+  background: #357ABD;
+  transform: translateY(-2px);
+}
+
+.card iframe {
+  width: 100%;
+  max-width: 350px;
+  height: 200px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* ===== Notifications ===== */
+#notifications {
+  padding: 25px;
+  background: #fff;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  width: 90%;
+}
+
+#notifications h2 {
+  color: #4a90e2;
+  margin-bottom: 10px;
+}
+
+#notifyList li {
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  background: #e0f7fa;
+  border-radius: 6px;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #4a90e2;
+  color: white;
+  font-weight: bold;
+}
+
+/* ===== Responsive ===== */
+@media screen and (max-width: 700px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+  }
+
+  .card-right {
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .card iframe {
+    max-width: 90%;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+ <header>
+
+  <h1>Universal Skill Exchange</h1>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="profile.html">Profiles</a>
+    <a href="topskills.html">Top Skills</a>
+    <a href="about.html">About</a>
+<div id="auth-buttons">
+  <button onclick="window.location.href='login.html'" class="btn btn-login">Login</button>
+  <button onclick="window.location.href='signup.html'" class="btn btn-signup">Sign Up</button>
+</div>
+<div id="user-info" style="display:none;">
+  <span id="welcome-user"></span>
+  <button onclick="logout()" class="btn btn-signup">Logout</button>
+</div>
+  </nav>
+
+  </header>
+
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Exchange Skills, Learn Together 🚀</h2>
+    <p>Offer your skills and learn new ones from others around the world.</p>
+    <button onclick="alert('Go find your skilled partner')">Get Started</button>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search">
+    <input type="text" id="searchBox" placeholder="Search skills...">
+    <button onclick="searchSkill()">Search</button>
+  </section>
+
+  <!-- Profiles Section -->
+  <section id="profiles">
+<h2>Check out these amazing users</h2>
+  <div id="profilesContainer"></div>
+</section>
+
+ 
+   
+  
+
+
+  <!-- Notifications -->
+  <section id="notifications">
+    <h2>Notifications</h2>
+    <ul id="notifyList"></ul>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Universal Skill Exchange Platform</p>
+  </footer>
+
+  <script>
+    // Search functionality
+    function searchSkill() {
+      let query = document.getElementById("searchBox").value.toLowerCase();
+      let cards = document.querySelectorAll(".card");
+      
+      cards.forEach(card => {
+        let text = card.innerText.toLowerCase();
+        card.style.display = text.includes(query) ? "block" : "none";
+      });
+    }
+
+    // Send request functionality
+  
+  </script>
+  <script>
+  function checkLoginStatus() {
+    let userName = localStorage.getItem("userName");
+    if (userName) {
+      document.getElementById("auth-buttons").style.display = "none";
+      document.getElementById("user-info").style.display = "inline-block";
+      document.getElementById("welcome-user").innerText = "Welcome, " + userName + "!";
+    } else {
+      document.getElementById("auth-buttons").style.display = "inline-block";
+      document.getElementById("user-info").style.display = "none";
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userPassword");
+    alert("Logged out successfully!");
+    window.location.href = "home.html";
+  }
+
+  // Run on page load
+  checkLoginStatus();
+</script>
+<script>
+// --- Users Data ---
+const users = [
+   {
+    name: "Arjun Nair",
+    offers: "Guitar 🎸",
+    wants: "Drums 🥁",
+    playlist: "https://www.youtube.com/embed/videoseries?list=PLcJdgAZAV7LH6pYCWJbL_9Htx-ocX7MFk",
+    demoVideo: "videos/854923-hd_1920_1080_25fps.mp4"
+  },
+  {
+    name: "Anjali Verma",
+    offers: "Drums 🥁",
+    wants: "Guitar 🎸",
+    playlist: "https://www.youtube.com/embed/videoseries?list=PLg-izumxljHOgkqFGPKX_MSuK09ufNNUp",
+    demoVideo: "videos/5659545-uhd_4096_2160_25fps.mp4"
+  },
+  {
+    name: "Rohit Sharma",
+    offers: "Baking 🍰",
+    wants: "Photography 📸",
+    playlist: "https://www.youtube.com/embed/videoseries?list=PL8dPuuaLjXtNCzLy2WJ-9vTQ8sB5nY0dx",
+    demoVideo: "videos/baking-demo.mp4"
+  },
+  {
+    name: "Sanya Mehta",
+    offers: "Hip-Hop Dance 💃",
+    wants: "Web Development 💻",
+    playlist: "https://www.youtube.com/embed/videoseries?list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ",
+    demoVideo: "videos/dance-demo.mp4"
+  },
+ 
+  {
+    name: "Neha Kapoor",
+    offers: "Yoga 🧘‍♀️",
+    wants: "Public Speaking 🎤",
+    playlist: "https://www.youtube.com/embed/videoseries?list=PLrR2OtFQuzdy0HOkLJ2wE8xmPKzW0fvk_",
+    demoVideo: "videos/yoga-demo.mp4"
+  },
+  {
+    name: "Kabir Khan",
+    offers: "Sketching 🎨",
+    wants: "Piano 🎹",
+    playlist: "https://www.youtube.com/embed/videoseries?list=PLT7Nbku6zUqQ1SmDaJD9_CnWjPG6zqLWw",
+    demoVideo: "videos/sketch-demo.mp4"
+  },
+  {
+    name: "Aditi Joshi",
+    offers: "Cooking 🍳",
+    wants: "Dance 💃",
+    playlist: "https://www.youtube.com/embed/videoseries?list=PLrR2OtFQuzdxY7u9eNwFvN4MecqR_0f5U",
+    demoVideo: "videos/cooking-demo.mp4"
+  },
+  {
+    name: "Karan Patel",
+    offers: "AI/ML 🤖",
+    wants: "Singing 🎤",
+    playlist: "https://www.youtube.com/embed/videoseries?list=PLQVvvaa0QuDfhTox0AjP6c4YpCaIK6L2P",
+    demoVideo: "videos/ai-demo.mp4"
+  },
+  {
+    name: "Meera Singh",
+    offers: "Photography 📷",
+    wants: "Baking 🍩",
+    playlist: "https://www.youtube.com/embed/videoseries?list=PLuHgQVnccGMClNOIAnsyF4YbY1C2ZMr2l",
+    demoVideo: "videos/photo-demo.mp4"
+  },
+  {
+    name: "Vikram Rao",
+    offers: "Chess ♟️",
+    wants: "Coding 👩‍💻",
+    playlist: "https://www.youtube.com/embed/videoseries?list=PLGSZ8dB7Ym-2gQHnW3BGQmQHsoAUVsWiR",
+    demoVideo: "videos/chess-demo.mp4"
+  }
+];
+
+
+// --- Display User Cards ---
+function displayProfiles() {
+  const container = document.getElementById("profilesContainer");
+  container.innerHTML = ""; // clear previous content
+
+  users.forEach(user => {
+    const card = document.createElement("div");
+    card.className = "card"; // add the card class
+
+ card.innerHTML = `
+  <div class="card-left">
+    <h3>${user.name}</h3>
+    <p><b>Offers:</b> ${user.offers}</p>
+    <p><b>Wants:</b> ${user.wants}</p>
+  </div>
+<div class="card-right" id="actions-${user.name.replace(/\s+/g,'')}">
+  <button onclick="showDemoVideo('${user.name}')">Demo Video</button>
+  <button onclick="sendRequest('${user.name}')" id="request-${user.name.replace(/\s+/g,'')}">
+    Request Exchange
+  </button>
+    <div id="demo-${user.name.replace(/\s+/g,'')}"></div>
+  <!-- Add this placeholder div for the profile button -->
+  <div id="playlist-${user.name.replace(/\s+/g,'')}"></div>
+</div>
+
+`;
+
+
+    container.appendChild(card);
+  });
+}
+
+// --- Handle Request & Approval ---
+function sendRequest(userName) {
+  // --- Check if user is logged in ---
+  if (!localStorage.getItem("userName")) {
+    alert("Please login first to send a request!");
+    return; // stop function if not logged in
+  }
+
+  alert(`Request sent to ${userName}!`);
+
+  let approvedUsers = JSON.parse(localStorage.getItem("approvedUsers")) || [];
+
+  // prevent duplicate approval
+  if (!approvedUsers.includes(userName)) {
+    setTimeout(() => {
+      approvedUsers.push(userName);
+      localStorage.setItem("approvedUsers", JSON.stringify(approvedUsers));
+      
+      // show playlist
+      showPlaylist(userName);
+
+      // show full profile button
+      showFullProfileButton(userName);
+
+      alert(`Skill exchange approved with ${userName}! You can now view their playlist and full profile.`);
+    }, 5000);
+  } else {
+    alert(`${userName} is already approved. You can view their playlist and full profile.`);
+    
+    showPlaylist(userName);
+    showFullProfileButton(userName);
+  }
+}
+
+
+// --- NEW FUNCTION: Show full profile button ---
+// --- Show Profile Button after approval ---
+function showPlaylist(userName) {
+  const approvedUsers = JSON.parse(localStorage.getItem("approvedUsers")) || [];
+  if (approvedUsers.includes(userName)) {
+    const user = users.find(u => u.name === userName);
+    const container = document.getElementById(`playlist-${user.name.replace(/\s+/g,'')}`);
+
+    // Clear old content
+    container.innerHTML = "";
+
+    // Add *only* profile button
+    const btn = document.createElement("button");
+    btn.id = `profile-btn-${userName.replace(/\s+/g,'')}`;
+    btn.textContent = "View Full Profile";
+    btn.style.marginTop = "10px";
+    btn.style.background = "#4a90e2";
+    btn.style.color = "white";
+    btn.style.border = "none";
+    btn.style.padding = "10px";
+    btn.style.borderRadius = "6px";
+    btn.style.cursor = "pointer";
+    btn.onclick = function() {
+      localStorage.setItem("selectedUser", JSON.stringify(user));
+      window.location.href = "userprofile.html";
+    };
+    container.appendChild(btn);
+  }
+}
+
+
+function showDemoVideo(userName) {
+  const user = users.find(u => u.name === userName);
+  const container = document.getElementById(`demo-${user.name.replace(/\s+/g,'')}`);
+  
+  // Check if already shown
+  if(container.innerHTML === "") {
+    container.innerHTML = `<iframe src="${user.demoVideo}" frameborder="0" allowfullscreen
+      style="width:100%; height:200px; border-radius:8px; margin-top:10px;"></iframe>`;
+  }
+}
+
+
+function showFullProfileButton(userName) {
+  const container = document.getElementById(`playlist-${userName.replace(/\s+/g,'')}`);
+  
+  // Check if button already exists
+  if(!document.getElementById(`profile-btn-${userName.replace(/\s+/g,'')}`)) {
+    const btn = document.createElement("button");
+    btn.id = `profile-btn-${userName.replace(/\s+/g,'')}`;
+    btn.textContent = "View Full Profile";
+    btn.style.marginTop = "10px";
+    btn.style.background = "#4a90e2";
+    btn.style.color = "white";
+    btn.style.border = "none";
+    btn.style.padding = "10px";
+    btn.style.borderRadius = "6px";
+    btn.style.cursor = "pointer";
+    btn.onclick = function() {
+      // Save selected user info to localStorage for userprofile.html
+      localStorage.setItem("selectedUser", JSON.stringify(users.find(u => u.name === userName)));
+      window.location.href = "userprofile.html";
+    };
+    container.appendChild(btn);
+  }
+}
+// --- Load Users on page load ---
+displayProfiles();
+</script>
+
+
+</body>
+</html>

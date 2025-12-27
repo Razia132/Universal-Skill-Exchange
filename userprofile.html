@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Profile</title>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f6f9; }
+  header, footer { background:#4a90e2; color:white; padding:15px; text-align:center; }
+  .container { padding:20px; display:flex; gap:20px; flex-wrap:wrap; }
+  .left, .right { background:white; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+  .left { flex:1 1 300px; }
+  .right { flex:2 1 500px; }
+  iframe { width:100%; border-radius:10px; }
+  button { background:#4a90e2; color:white; border:none; padding:10px; border-radius:8px; cursor:pointer; margin-top:10px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>User Profile</h1>
+</header>
+
+<div class="container">
+  <div class="left">
+    <h2 id="userName"></h2>
+    <p><b>Offers:</b> <span id="userOffers"></span></p>
+    <p><b>Wants:</b> <span id="userWants"></span></p>
+    <p><b>Special Suggestions:</b> <span id="userSuggestions"></span></p>
+    <p><b>Resources:</b> <span id="userResources"></span></p>
+    <button onclick="requestVideoCall()">Request Video Call</button>
+  </div>
+  <div class="right">
+    <h3>Playlist</h3>
+    <div id="playlistContainer"></div>
+
+    <h3>Demo Video</h3>
+    <div id="demoContainer"></div>
+  </div>
+</div>
+
+<footer>
+  © 2025 Universal Skill Exchange
+</footer>
+
+<script>
+  // Get user data from localStorage (passed from home.html)
+  const user = JSON.parse(localStorage.getItem("selectedUser"));
+
+  if(user) {
+    document.getElementById("userName").innerText = user.name;
+    document.getElementById("userOffers").innerText = user.offers;
+    document.getElementById("userWants").innerText = user.wants;
+    document.getElementById("userSuggestions").innerText = user.suggestions || "None";
+    document.getElementById("userResources").innerText = user.resources || "None";
+
+    // Show playlist after approval
+    const approvedUsers = JSON.parse(localStorage.getItem("approvedUsers")) || [];
+    if(approvedUsers.includes(user.name)) {
+      document.getElementById("playlistContainer").innerHTML = `<iframe width="100%" height="250" src="${user.playlist}" frameborder="0" allowfullscreen></iframe>`;
+    } else {
+      document.getElementById("playlistContainer").innerHTML = `<p>Playlist will be available after approval.</p>`;
+    }
+
+    // Demo video
+    document.getElementById("demoContainer").innerHTML = `<iframe width="100%" height="200" src="${user.demoVideo}" frameborder="0" allowfullscreen></iframe>`;
+  }
+
+  function requestVideoCall() {
+    alert(`Video call request sent to ${user.name}!`);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Skill Exchange Platform</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #4a90e2, #2277cc);
+      color: white;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: background 2s ease;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .quotes {
+      font-size: 20px;
+      max-width: 600px;
+      margin: 15px auto;
+      font-style: italic;
+      line-height: 1.6;
+      min-height: 70px; /* keeps space even while changing text */
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 14px 32px;
+      font-size: 18px;
+      background: white;
+      color: #4a90e2;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      opacity: 0; /* start hidden */
+    }
+
+    button.show {
+      opacity: 1;
+      transition: opacity 1.5s ease;
+    }
+
+    button:hover {
+      background: #348be2;
+      color: white;
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+  <h1>🌟Welcome to Skill Exchange Platform 🌟</h1>
+
+  <div class="quotes" id="quoteBox"></div>
+
+  <button id="enterBtn" onclick="window.location.href='home.html'">Enter Platform 🚀</button>
+
+  <script>
+    // Quotes to cycle through
+    const quotes = [
+      "Everyone has something to learn, and everyone has something to teach.",
+      "Exchange skills, not just knowledge — build a smarter world together.",
+      "Your skill could be the key to someone’s dream, and theirs to yours."
+    ];
+
+    let quoteBox = document.getElementById("quoteBox");
+    let index = 0;
+    let charIndex = 0;
+
+    // Typing effect
+    function typeQuote() {
+      if (charIndex < quotes[index].length) {
+        quoteBox.innerHTML += quotes[index].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeQuote, 50); // typing speed
+      } else {
+        setTimeout(() => {
+          quoteBox.innerHTML = ""; // clear
+          charIndex = 0;
+          index = (index + 1) % quotes.length; // next quote
+          typeQuote();
+        }, 2500); // hold quote before next
+      }
+    }
+
+    // Show button after 2 sec
+    setTimeout(() => {
+      document.getElementById("enterBtn").classList.add("show");
+    }, 2000);
+
+    // Background gradient changer
+    const colors = [
+      ["#4a90e2", "#2277cc"],
+      ["#50c9c3", "#96deda"],
+      ["#667eea", "#764ba2"],
+      ["#ff9966", "#ff5e62"]
+    ];
+
+    function changeBackground() {
+      const pair = colors[Math.floor(Math.random() * colors.length)];
+      document.body.style.background = `linear-gradient(135deg, ${pair[0]}, ${pair[1]})`;
+    }
+    setInterval(changeBackground, 8000);
+
+    // Start typing
+    typeQuote();
+  </script>
+</body>
+</html>
